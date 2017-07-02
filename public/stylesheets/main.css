@@ -1,0 +1,23 @@
+a:hover {
+    text-decoration: none;
+}
+
+#form {
+    padding-top: 15vh;
+}
+
+#in-line {
+    display: inline;
+}
+
+.error-text {
+    margin-left: 45px;
+}
+
+.error {
+    color: #D50000;
+}
+
+.ct-label {
+    font-size: 20px;
+}

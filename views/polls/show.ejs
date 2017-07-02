@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VoteBaz</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {packages: ['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+        <%var pollData = [['Task', 'Hours per Day']]%>
+        <%poll.options.forEach(function(option) {%>
+           <%pollData.push([option.name, option.vote])%> 
+        <%});%>
+        var data = google.visualization.arrayToDataTable(<%- JSON.stringify(pollData); %>);
+
+        var options = {
+          title: <%- JSON.stringify(poll.title); %>,
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+        </script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+        <title>Voting App</title>
+    </head>
+    <body>
+        <div class="container-fluid mt-2">
+            <% if(success && success.length > 0) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Woo hoo!</strong> <%= success %>
+                            </div>
+            <% } %>
+            <% if(error&& error.length > 0) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Bummer!</strong> <%= error %>
+                            </div>
+            <% } %>
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                  <div class="text-center">
+                      <h1 class="display-3">Vote<em>Baz</em></h1>
+                      <p class="lead">Vote<em>Baz</em> Poll by <%=poll.author.username%></p>
+                      <a href="/">
+                          <button class="btn btn-info">Back Home</button>
+                      </a>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <%if(isVoted === false) {%>
+                                <p class="lead">I want to vote for...</p>
+                                    <%poll.options.forEach(function(option) {%>
+                                <form action="/poll/<%=poll._id%>/<%=option.name%>/<%=option.vote%>?_method=PUT" method="POST">
+                                <button type="submit" id="<%option.name%>" name="<%option.name%>" class="btn btn-primary btn-block my-1">
+                                    <%=option.name%>
+                                </button>
+                                </form>
+                                    <%})%>
+                            <%} else { %>
+                                <div class="text-center">
+                                    <h4 class="display-4 text-muted mt-5"><em>We loved your vote</em></h4>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    </body>
+</html>

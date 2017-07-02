@@ -1,0 +1,42 @@
+<% include ./partials/header %>
+
+<div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+          <div class="text-center">
+              <h1 class="display-3">Vote<em>Baz</em></h1>
+              <p class="lead">Hey, <%=user.username%></p>
+              <a href="/">
+                <button class="btn btn-primary">Back Home</button>
+              </a>
+              <a href="/poll/new">
+                <button class="btn btn-primary">New Poll</button>
+              </a>
+          </div>
+      </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+            <%user.polls.forEach(function(poll) {%>
+                <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        Vote<em>Baz</em> Poll
+                    </div>
+                    <div class="card-block">
+                        <div class="text-center">
+                            <h4 class="card-title"><%=poll.title%></h4>
+                            <a href="/poll/show/<%=poll._id%>" class="btn btn-primary">View</a>
+                            <form id="in-line" action="/poll/<%=poll._id%>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <%})%>
+    </div>
+</div>
+
+<% include ./partials/footer %>

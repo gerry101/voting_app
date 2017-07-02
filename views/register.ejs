@@ -1,0 +1,42 @@
+<% include ./partials/header %>
+
+<div id="form" class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="text-center mb-3">
+                <h4 class="display-4 text-muted">Register : </h4>
+            </div>
+            <form id="register-form" action="/register" method="POST">
+                <div class="form-group row">
+                    <label for="username" class="col-sm-2 col-form-label col-form-label-lg mr-4">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label col-form-label-lg mr-4">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Email">
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label for="password" class="col-sm-2 col-form-label mr-4">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label for="confirm" class="col-sm-2 col-form-label mr-4">Confirm</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="confirm" name="confirm" placeholder="Confirm Password">
+                    </div>
+                </div> 
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+
+<% include ./partials/footer %>

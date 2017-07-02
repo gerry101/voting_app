@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<div id="form" class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="text-center mb-3">
+                <h4 class="display-4 text-muted">New-Poll</h4>
+            </div>
+            <form id="new-poll" action="/poll" method="POST">
+                <div class="form-group row">
+                    <label for="username" class="col-sm-2 col-form-label col-form-label-lg mr-4">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-lg" id="title" name="title" placeholder="poll title">
+                    </div>
+                </div>
+                <h5 class="my-2 text-muted">Poll Options</h5>
+                <div class="input_fields_wrap">
+                    <button class="add_field_button btn btn-info mb-2">Add Option Fields</button>
+                    <div><input class="form-control" type="text" name="option[]" placeholder="poll option"></div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Create</button>
+            </form>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+
+<% include ../partials/pollFooter %>
