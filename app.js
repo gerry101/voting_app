@@ -1,7 +1,7 @@
 var session        = require('express-session'),
     methodOverride = require('method-override'),
     LocalStrategy  = require('passport-local'),
-//    config         = require('./config/index'),
+    config         = require('./config/index'),
     User           = require('./models/user'),
     flash          = require('connect-flash'),
     bodyParser     = require('body-parser'),
@@ -14,7 +14,7 @@ var indexRoutes = require('./routes/index'),
     pollRoutes  = require('./routes/poll');
 
 //voting_app
-mongoose.connect('mongodb://gerry_migwi:chatinter@ds145892.mlab.com:45892/voting_app');
+mongoose.connect(config.DATABASEURL);
 
 app.use(session({
     secret: 'voting app app in voting',
