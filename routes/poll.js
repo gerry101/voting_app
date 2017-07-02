@@ -42,7 +42,7 @@ router.post('/poll', middleware.isLoggedIn, function(req, res) {
                req.user.polls.push(poll);
                req.user.save();
                poll.save();
-               req.flash('success', 'Your poll can be shared through: ' + req.headers.host + '/poll/show/' + poll._id);
+               req.flash('success', 'Your poll can be shared through: ' + 'https://' + req.headers.host + '/poll/show/' + poll._id);
                res.redirect('/poll/show/' + poll._id);
            }
         });
@@ -62,7 +62,7 @@ router.get('/poll/show/:id', function(req, res) {
                }
            }
        }
-       res.render('polls/show', {poll: poll, isVoted: isVoted, 'success': 'This poll can be shared through: ' + req.headers.host + '/poll/show/' + poll._id});
+       res.render('polls/show', {poll: poll, isVoted: isVoted, 'success': 'This poll can be shared through: ' + 'https://' + req.headers.host + '/poll/show/' + poll._id});
    });
 });
 
