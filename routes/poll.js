@@ -57,7 +57,7 @@ router.get('/poll/show/:id', function(req, res) {
        var isVoted = false;
        if(poll.ip.length > 0) {
            for(var i = 0; i < poll.ip.length; i++) {
-               if(poll.ip[i].ip === req.ip) {
+               if(poll.ip[i].ip.equals(req.ip)) {
                    isVoted = true;
                }
            }
