@@ -71,7 +71,6 @@ router.get('/poll/show/:id', function(req, res) {
                }
            }
        }
-       console.log(isVoted);
        res.render('polls/show', {poll: poll, isVoted: isVoted, 'success': 'This poll can be shared through: ' + 'https://' + req.headers.host + '/poll/show/' + poll._id});
    });
 });
