@@ -1,5 +1,6 @@
 var Poll       = require('../models/poll'),
     middleware = require('../middleware'),
+    getIp          = require('ipware'),
     express    = require('express'),
     router     = express.Router();
 
@@ -67,6 +68,15 @@ router.get('/poll/show/:id', function(req, res) {
 });
 
 router.put('/poll/:id/:option/:vote', function(req, res) {
+   var ip;
+    if(req.headers['x-forwarded-for']) {
+        ip = req.headers['x-forwarded-for'].split(',')[0];
+    } else if(req.connection && req.connection.remoteAddress) {
+        ip = req.connection.remoteAddress;
+    } else {
+        ip = req.ip;
+    }
+    
    var newVote = Number(req.params.vote) + 1;
    Poll.update({'options.name': req.params.option}, {'$set': {
     'options.$.vote': newVote
@@ -80,7 +90,7 @@ router.put('/poll/:id/:option/:vote', function(req, res) {
               req.flash('error', 'An error seems to have ocured');
               res.redirect('/poll/show/' + req.params.id);
           } else {
-              poll.ip.push({ip: req.ip});
+              poll.ip.push({ip: ip});
               poll.save();
           }
        });
