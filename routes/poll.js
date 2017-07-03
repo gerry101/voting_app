@@ -1,6 +1,5 @@
 var Poll       = require('../models/poll'),
     middleware = require('../middleware'),
-    getIp          = require('ipware'),
     express    = require('express'),
     router     = express.Router();
 
