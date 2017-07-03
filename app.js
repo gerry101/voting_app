@@ -7,7 +7,6 @@ var session        = require('express-session'),
     mongoose       = require('mongoose'),
     passport       = require('passport'),
     express        = require('express'),
-    getIp          = require('ipware'),
     app            = express();
 
 var indexRoutes = require('./routes/index'),
