@@ -49,6 +49,15 @@ router.post('/poll', middleware.isLoggedIn, function(req, res) {
 });
 
 router.get('/poll/show/:id', function(req, res) {
+   var ip;
+    if(req.headers['x-forwarded-for']) {
+        ip = req.headers['x-forwarded-for'].split(',')[0];
+    } else if(req.connection && req.connection.remoteAddress) {
+        ip = req.connection.remoteAddress;
+    } else {
+        ip = req.ip;
+    }
+    
    Poll.findById(req.params.id).populate('options').populate('ip').exec(function(err, poll) {
       if(err) {
           req.flash('error', 'An error seems to have ocured');
@@ -57,7 +66,7 @@ router.get('/poll/show/:id', function(req, res) {
        var isVoted = false;
        if(poll.ip.length > 0) {
            for(var i = 0; i < poll.ip.length; i++) {
-               if(poll.ip[i].ip.equals(req.ip)) {
+               if(poll.ip[i].ip === ip) {
                    isVoted = true;
                }
            }
